@@ -38,4 +38,10 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
         userDAO.deleteUser(id);
     }
+
+    @Transactional
+    @Override
+    public List<User> checkUserMailExists(String mail) {
+        return userDAO.checkUserMailExists(mail);
+    }
 }

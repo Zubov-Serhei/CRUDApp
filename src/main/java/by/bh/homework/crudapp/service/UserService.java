@@ -9,4 +9,5 @@ public interface UserService {
     List<User> list();
     User getUserById(Long id);
     void deleteUser(Long id);
+    List<User> checkUserMailExists(String mail);
 }

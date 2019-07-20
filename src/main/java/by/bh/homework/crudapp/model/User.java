@@ -2,6 +2,8 @@ package by.bh.homework.crudapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+
+import by.bh.homework.crudapp.annotation.Duplicate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import java.util.Objects;
@@ -19,8 +21,9 @@ public class User {
     @Size(max = 20, min = 3, message = "{Size.user.name}")
     private String name;
 
-    @Column(name = "mail", unique = true)
-    @NotEmpty(message="Please Enter your email")
+    @Column(name = "mail", unique = true, nullable = false)
+    @NotEmpty(message="{NotEmpty.user.mail}")
+    @Duplicate(message = "{Duplicate.user.mail}T")
     @Email(message = "{Email.user.mail}")
     private String mail;
 

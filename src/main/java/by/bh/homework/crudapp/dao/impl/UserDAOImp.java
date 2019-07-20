@@ -9,6 +9,7 @@ import org.hibernate.query.criteria.internal.CriteriaBuilderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -26,16 +27,7 @@ public class UserDAOImp implements UserDAO {
 
     @Override
     public void save(User user) {
-        try {
-            if(user.getId()==null){
-                if (sessionFactory.getCurrentSession().createQuery("from User where mail =:mail")
-                        .setParameter("mail",user.getMail())
-                        .list().isEmpty())sessionFactory.getCurrentSession().save(user);
-            }else
-            sessionFactory.getCurrentSession().saveOrUpdate(user);
-        }catch (Exception e){
-            log.log(Level.INFO,"Exception in UserDAOImpl method save: ", e);
-        }
+        sessionFactory.getCurrentSession().save(user);
     }
 
     @Override
@@ -57,5 +49,12 @@ public class UserDAOImp implements UserDAO {
     public void deleteUser(Long id) {
         User user = sessionFactory.getCurrentSession().load(User.class,id);
         sessionFactory.getCurrentSession().delete(user);
+    }
+
+    @Override
+    public List<User> checkUserMailExists(String mail) {
+        return sessionFactory.getCurrentSession().createQuery("from User where mail =:mail")
+                .setParameter("mail",mail)
+                .list();
     }
 }
