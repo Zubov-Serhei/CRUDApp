@@ -35,7 +35,7 @@
         <tld.version>1.1.2</tld.version>
         <servlets.version>3.1.0</servlets.version>
         <jsp.version>2.3.1</jsp.version>
-        <MySQL.version>5.1.47</MySQL.version>
+        <MySQL.version>8.0.28</MySQL.version>
 
     </properties>
     <dependencies>
